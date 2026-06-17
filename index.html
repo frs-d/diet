@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Диетический стол №5 — Рацион питания</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f7f5f0;
+            --card: #ffffff;
+            --accent: #4a7c59;
+            --accent-light: #e9f0eb;
+            --accent-dark: #2d5a3d;
+            --warm: #8b7355;
+            --warm-light: #f5f0e8;
+            --danger: #c0392b;
+            --danger-light: #fdf0ee;
+            --danger-border: #e8c4bf;
+            --text: #2c2c2c;
+            --text-muted: #8a8a8a;
+            --text-secondary: #5a5a5a;
+            --border: #e8e4dd;
+            --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.06);
+            --shadow-hover: 0 2px 8px rgba(0,0,0,0.06), 0 8px 30px rgba(0,0,0,0.1);
+            --radius: 20px;
+            --radius-sm: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .page {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 24px 20px 60px;
+        }
+
+        /* ─── HEADER ─── */
+        header {
+            position: relative;
+            padding: 56px 40px 48px;
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 28px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), #7ab88a, var(--warm));
+        }
+
+        header .label {
+            display: inline-block;
+            font-size: 0.7em;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: var(--accent-light);
+            padding: 6px 14px;
+            border-radius: 100px;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2.2em;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 1.05em;
+            max-width: 520px;
+        }
+
+        .decorative-leaf {
+            position: absolute;
+            right: 32px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 5em;
+            opacity: 0.08;
+            pointer-events: none;
+        }
+
+        /* ─── INFO BANNER ─── */
+        .info-banner {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            background: var(--warm-light);
+            border: 1px solid #e4d9c8;
+            padding: 18px 22px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 28px;
+            font-size: 0.92em;
+            color: var(--text-secondary);
+        }
+
+        .info-banner .icon {
+            font-size: 1.4em;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .info-banner strong {
+            color: var(--warm);
+        }
+
+        /* ─── CARDS ─── */
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 6px;
+        }
+
+        .card-icon {
+            width: 42px;
+            height: 42px;
+            background: var(--accent-light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            flex-shrink: 0;
+        }
+
+        .card-header h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.35em;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .card-subtitle {
+            color: var(--text-muted);
+            font-size: 0.85em;
+            margin-bottom: 20px;
+            padding-left: 54px;
+        }
+
+        /* ─── TABLES ─── */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 0 -8px;
+            padding: 0 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        thead th {
+            text-align: left;
+            font-size: 0.75em;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            padding: 0 16px 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tbody td {
+            padding: 14px 16px;
+            font-size: 0.9em;
+            border-bottom: 1px solid #f4f2ee;
+            vertical-align: top;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody td:first-child {
+            font-weight: 500;
+            color: var(--text);
+            white-space: nowrap;
+        }
+
+        tbody td:nth-child(2) {
+            color: var(--text-secondary);
+        }
+
+        tbody td:nth-child(3) {
+            color: var(--text-muted);
+            font-size: 0.85em;
+        }
+
+        /* ─── NOTES ─── */
+        .note {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            background: var(--accent-light);
+            border-radius: var(--radius-sm);
+            padding: 14px 18px;
+            margin-top: 16px;
+            font-size: 0.85em;
+            color: var(--accent-dark);
+        }
+
+        .note .n-icon {
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .warning-note {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            background: var(--danger-light);
+            border: 1px solid var(--danger-border);
+            border-radius: var(--radius-sm);
+            padding: 14px 18px;
+            margin-top: 16px;
+            font-size: 0.85em;
+            color: #9e3028;
+        }
+
+        /* ─── DRINKS GRID ─── */
+        .pill-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--accent-light);
+            color: var(--accent-dark);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+
+        .pill .check {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* ─── FORBIDDEN ─── */
+        .card-forbidden {
+            background: var(--card);
+            border: 1px solid var(--danger-border);
+            border-radius: var(--radius);
+            padding: 32px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .card-forbidden .card-icon {
+            background: var(--danger-light);
+        }
+
+        .card-forbidden .card-header h2 {
+            color: var(--danger);
+        }
+
+        .forbidden-list {
+            columns: 2;
+            column-gap: 20px;
+            list-style: none;
+        }
+
+        .forbidden-list li {
+            padding: 7px 0;
+            font-size: 0.88em;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            break-inside: avoid;
+        }
+
+        .forbidden-list li .x {
+            color: var(--danger);
+            font-size: 0.75em;
+            font-weight: 700;
+            width: 20px;
+            height: 20px;
+            background: var(--danger-light);
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* ─── PRINCIPLES ─── */
+        .principles-list {
+            counter-reset: step;
+            list-style: none;
+        }
+
+        .principles-list li {
+            counter-increment: step;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 10px 0;
+            font-size: 0.92em;
+            color: var(--text-secondary);
+        }
+
+        .principles-list li::before {
+            content: counter(step);
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            background: var(--accent-light);
+            color: var(--accent);
+            font-size: 0.8em;
+            font-weight: 600;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .principles-list li strong {
+            color: var(--text);
+        }
+
+        /* ─── MEALS ─── */
+        .meal-group {
+            margin-bottom: 24px;
+        }
+
+        .meal-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .meal-group-title {
+            font-size: 0.75em;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .meal-list {
+            list-style: none;
+        }
+
+        .meal-list li {
+            position: relative;
+            padding: 8px 0 8px 20px;
+            font-size: 0.9em;
+            color: var(--text-secondary);
+        }
+
+        .meal-list li::before {
+            content: '';
+            position: absolute;
+            left: 2px;
+            top: 15px;
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            opacity: 0.5;
+        }
+
+        /* ─── DAY PLAN ─── */
+        .day-plan {
+            background: linear-gradient(135deg, #faf8f4, #f3f0e8);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 24px;
+            margin-top: 28px;
+        }
+
+        .day-plan-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.1em;
+            color: var(--text);
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .day-plan table tbody td:first-child {
+            white-space: nowrap;
+        }
+
+        .day-plan table tbody td:nth-child(2) {
+            color: var(--text-muted);
+            font-size: 0.85em;
+            white-space: nowrap;
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            text-align: center;
+            padding: 40px 20px 20px;
+            color: var(--text-muted);
+            font-size: 0.8em;
+            line-height: 1.7;
+        }
+
+        footer .divider {
+            width: 40px;
+            height: 2px;
+            background: var(--border);
+            margin: 0 auto 16px;
+            border-radius: 2px;
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 640px) {
+            .page {
+                padding: 16px 14px 48px;
+            }
+
+            header {
+                padding: 36px 24px 32px;
+            }
+
+            header h1 {
+                font-size: 1.6em;
+            }
+
+            header p {
+                font-size: 0.95em;
+            }
+
+            .decorative-leaf {
+                display: none;
+            }
+
+            .card, .card-forbidden {
+                padding: 22px 18px;
+            }
+
+            .card-subtitle {
+                padding-left: 0;
+            }
+
+            thead th, tbody td {
+                padding: 10px 10px;
+            }
+
+            tbody td:first-child {
+                white-space: normal;
+            }
+
+            .forbidden-list {
+                columns: 1;
+            }
+
+            .day-plan table tbody td:nth-child(2) {
+                display: none;
+            }
+
+            .day-plan {
+                padding: 18px 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+
+        <!-- HEADER -->
+        <header>
+            <span class="label">Лечебное питание</span>
+            <h1>Диетический стол №5</h1>
+            <p>Рацион питания при заболеваниях печени и&nbsp;желчевыводящих путей</p>
+            <div class="decorative-leaf">🌿</div>
+        </header>
+
+        <!-- INFO -->
+        <div class="info-banner">
+            <span class="icon">💡</span>
+            <div><strong>Принцип диеты:</strong> щадящее питание для печени и желчного пузыря. Вся еда варится, тушится или запекается. Исключается жареное, жирное, острое, копчёное и кислое. Питание дробное — 5–6 раз в день небольшими порциями.</div>
+        </div>
+
+        <!-- ПРАВИЛА -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">📋</div>
+                <h2>Основные правила</h2>
+            </div>
+            <p class="card-subtitle">Базовые принципы диетического стола №5</p>
+            <ul class="principles-list">
+                <li>Готовить на пару, варить, тушить или запекать. <strong>Не жарить.</strong></li>
+                <li>Есть тёплую еду — не слишком горячую и не холодную.</li>
+                <li>Питаться 5–6 раз в день небольшими порциями.</li>
+                <li>Пить не менее 2–2,5 литров чистой воды в день.</li>
+                <li>Ограничить соль (до 10 г в день).</li>
+                <li>Избегать продуктов, вызывающих вздутие — вводить их постепенно.</li>
+                <li>Не есть за 2–3 часа до сна (лёгкий перекус допустим).</li>
+            </ul>
+        </div>
+
+        <!-- КРУПЫ -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">🌾</div>
+                <h2>Крупы и гарниры</h2>
+            </div>
+            <p class="card-subtitle">Основа рациона — источник энергии и клетчатки</p>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Продукт</th><th>Приготовление</th><th>Примечание</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Гречка</td><td>Варить или запаривать кипятком</td><td>Богата железом и белком</td></tr>
+                        <tr><td>Овсянка (долгая варка)</td><td>Варить на воде или растительном молоке</td><td>Идеальна для завтрака</td></tr>
+                        <tr><td>Рис</td><td>Варить</td><td>Белый или бурый, легко усваивается</td></tr>
+                        <tr><td>Булгур</td><td>Варить, тушить с овощами</td><td>Сытный, приятный вкус</td></tr>
+                        <tr><td>Кускус</td><td>Залить кипятком на 5 минут</td><td>Быстро готовится</td></tr>
+                        <tr><td>Макароны</td><td>Варить al dente</td><td>Только из твёрдых сортов пшеницы</td></tr>
+                        <tr><td>Картофель</td><td>Варить, запекать, пюре</td><td>Не жарить</td></tr>
+                        <tr><td>Перловка</td><td>Замочить, затем варить</td><td>Бюджетно и сытно</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- БЕЛОК -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">💪</div>
+                <h2>Источники белка</h2>
+            </div>
+            <p class="card-subtitle">Для восстановления и поддержания мышечной массы</p>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Продукт</th><th>Приготовление</th><th>Примечание</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Тофу</td><td>Запекать, тушить, в супы</td><td>Основной источник белка, лёгкий для печени</td></tr>
+                        <tr><td>Соевый текстурат</td><td>Замочить, затем тушить с овощами</td><td>Бюджетный, ~50% белка</td></tr>
+                        <tr><td>Чечевица</td><td>Варить (красная — 15 мин)</td><td>Богата белком и железом</td></tr>
+                        <tr><td>Нут</td><td>Замочить на ночь, варить</td><td>Хумус, в супы, в рагу</td></tr>
+                        <tr><td>Фасоль</td><td>Замочить на ночь, варить</td><td>Белая или красная, можно консервированную</td></tr>
+                        <tr><td>Зелёный горошек</td><td>Варить (замороженный)</td><td>Удобно и бюджетно</td></tr>
+                        <tr><td>Протеин (соевый/гороховый)</td><td>Размешать в воде или молоке</td><td>Дополнительно при физ. нагрузках</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="note">
+                <span class="n-icon">ℹ️</span>
+                <div><strong>Важно:</strong> Бобовые (нут, фасоль, чечевица) могут вызывать вздутие. Замачивать на ночь и хорошо проваривать. Вводить в рацион постепенно. Тофу и соевый текстурат усваиваются легче.</div>
+            </div>
+        </div>
+
+        <!-- ОВОЩИ -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">🥦</div>
+                <h2>Овощи</h2>
+            </div>
+            <p class="card-subtitle">Варёные, тушёные и запечённые — основа гарниров и супов</p>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Продукт</th><th>Приготовление</th><th>Примечание</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Кабачки</td><td>Тушить, запекать</td><td>Очень мягкие, идеальны для диеты</td></tr>
+                        <tr><td>Цветная капуста</td><td>Варить, запекать, пюрировать</td><td>Легко усваивается</td></tr>
+                        <tr><td>Брокколи</td><td>Варить, на пару, запекать</td><td>Богата витаминами</td></tr>
+                        <tr><td>Морковь</td><td>Варить, тушить, в суп</td><td>Немного можно в сыром виде</td></tr>
+                        <tr><td>Тыква</td><td>Запекать, варить, каша</td><td>Сладковатая, полезна для печени</td></tr>
+                        <tr><td>Свёкла</td><td>Отварить, в салат</td><td>Полезна для пищеварения</td></tr>
+                        <tr><td>Стручковая фасоль</td><td>Тушить, варить</td><td>Замороженная — удобно и бюджетно</td></tr>
+                        <tr><td>Болгарский перец</td><td>Тушить, запекать</td><td>В сыром виде — с осторожностью</td></tr>
+                        <tr><td>Огурцы</td><td>Свежие</td><td>В умеренных количествах</td></tr>
+                        <tr><td>Помидоры</td><td>Тушёные предпочтительнее</td><td>Сырые — немного и некислые</td></tr>
+                        <tr><td>Зелень</td><td>Свежая, в готовые блюда</td><td>Укроп, петрушка — понемногу</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ФРУКТЫ -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">🍎</div>
+                <h2>Фрукты и сладкое</h2>
+            </div>
+            <p class="card-subtitle">Натуральные источники витаминов и полезных перекусов</p>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Продукт</th><th>Как употреблять</th><th>Примечание</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Бананы</td><td>Свежие, в кашу</td><td>Калий + быстрая энергия</td></tr>
+                        <tr><td>Яблоки (сладкие)</td><td>Запечённые или свежие</td><td>Кислые сорта исключить</td></tr>
+                        <tr><td>Груши</td><td>Свежие, запечённые</td><td>Мягкие для желудка</td></tr>
+                        <tr><td>Курага</td><td>Как перекус, в кашу</td><td>Не более горсти в день</td></tr>
+                        <tr><td>Чернослив</td><td>Как перекус, в кашу</td><td>Полезен для пищеварения</td></tr>
+                        <tr><td>Изюм</td><td>В кашу, в выпечку</td><td>Понемногу</td></tr>
+                        <tr><td>Финики</td><td>Как перекус</td><td>3–5 штук в день, натуральный десерт</td></tr>
+                        <tr><td>Пастила натуральная</td><td>Десерт</td><td>Без красителей и добавок</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ЖИРЫ -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">🥑</div>
+                <h2>Полезные жиры</h2>
+            </div>
+            <p class="card-subtitle">Необходимы для гормонов и усвоения витаминов — в небольших количествах</p>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Продукт</th><th>Как использовать</th><th>Примечание</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Льняное масло</td><td>В готовые блюда и салаты (1 ст. л.)</td><td>Не нагревать! Источник Омега-3</td></tr>
+                        <tr><td>Оливковое масло</td><td>В готовые блюда, немного</td><td>Не жарить</td></tr>
+                        <tr><td>Грецкие орехи</td><td>Как перекус</td><td>5–7 штук в день</td></tr>
+                        <tr><td>Семена льна</td><td>Молотые — в кашу, в смузи</td><td>Омега-3, полезны для печени</td></tr>
+                        <tr><td>Семечки подсолнуха</td><td>Как перекус</td><td>Сырые или подсушенные, не жареные</td></tr>
+                        <tr><td>Авокадо</td><td>Свежее, в салат</td><td>При наличии в бюджете</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- НАПИТКИ -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">🥤</div>
+                <h2>Напитки</h2>
+            </div>
+            <p class="card-subtitle">Основа — чистая вода, не менее 2–2,5 литров в день</p>
+            <div class="pill-grid">
+                <span class="pill"><span class="check">✓</span> Чистая вода</span>
+                <span class="pill"><span class="check">✓</span> Некрепкий чай</span>
+                <span class="pill"><span class="check">✓</span> Компот из сухофруктов</span>
+                <span class="pill"><span class="check">✓</span> Отвар шиповника</span>
+                <span class="pill"><span class="check">✓</span> Растительное молоко</span>
+                <span class="pill"><span class="check">✓</span> Цикорий</span>
+                <span class="pill"><span class="check">✓</span> Кисель</span>
+                <span class="pill"><span class="check">✓</span> Некислые разбавленные соки</span>
+            </div>
+            <div class="warning-note">
+                <span class="n-icon">⚠️</span>
+                <div><strong>Ограничить или исключить:</strong> крепкий кофе, газированные напитки, магазинные соки с сахаром, алкоголь.</div>
+            </div>
+        </div>
+
+        <!-- ЗАПРЕЩЕНО -->
+        <div class="card-forbidden">
+            <div class="card-header">
+                <div class="card-icon">🚫</div>
+                <h2>Исключить из рациона</h2>
+            </div>
+            <p class="card-subtitle" style="padding-left: 54px; margin-bottom: 16px;">Продукты, нагружающие печень и желчный пузырь</p>
+            <ul class="forbidden-list">
+                <li><span class="x">✕</span> Жареная пища</li>
+                <li><span class="x">✕</span> Жирные и копчёные продукты</li>
+                <li><span class="x">✕</span> Острые специи и соусы</li>
+                <li><span class="x">✕</span> Сырой лук и чеснок</li>
+                <li><span class="x">✕</span> Редька, редис, репа</li>
+                <li><span class="x">✕</span> Шпинат, щавель</li>
+                <li><span class="x">✕</span> Грибы</li>
+                <li><span class="x">✕</span> Кислые фрукты и ягоды</li>
+                <li><span class="x">✕</span> Маринады и соленья</li>
+                <li><span class="x">✕</span> Сдобная выпечка, свежий белый хлеб</li>
+                <li><span class="x">✕</span> Шоколад, какао</li>
+                <li><span class="x">✕</span> Газированные сладкие напитки</li>
+                <li><span class="x">✕</span> Крепкий кофе</li>
+                <li><span class="x">✕</span> Алкоголь</li>
+                <li><span class="x">✕</span> Фастфуд, чипсы, сухарики</li>
+                <li><span class="x">✕</span> Мороженое</li>
+            </ul>
+        </div>
+
+        <!-- БЛЮДА -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">🍽️</div>
+                <h2>Готовые блюда — примеры</h2>
+            </div>
+            <p class="card-subtitle">Простые, бюджетные и подходящие под диету варианты</p>
+
+            <div class="meal-group">
+                <div class="meal-group-title">🌅 Завтраки</div>
+                <ul class="meal-list">
+                    <li>Овсяная каша на растительном молоке с бананом и семенами льна</li>
+                    <li>Гречневая каша с тушёными кабачками</li>
+                    <li>Каша из булгура с курагой и изюмом</li>
+                    <li>Тыквенная каша с рисом</li>
+                </ul>
+            </div>
+
+            <div class="meal-group">
+                <div class="meal-group-title">☀️ Обеды</div>
+                <ul class="meal-list">
+                    <li>Суп из красной чечевицы (чечевица, морковь, картофель, куркума)</li>
+                    <li>Гречка с тушёным соевым текстуратом и овощами</li>
+                    <li>Рис с запечённым тофу и брокколи</li>
+                    <li>Макароны с овощным рагу (кабачок, морковь, цветная капуста)</li>
+                    <li>Картофельное пюре с тушёной фасолью и морковью</li>
+                    <li>Суп-пюре из тыквы (тыква, картофель, морковь)</li>
+                    <li>Плов с нутом (рис, нут, морковь, куркума, зира)</li>
+                    <li>Борщ на овощном бульоне со свёклой</li>
+                </ul>
+            </div>
+
+            <div class="meal-group">
+                <div class="meal-group-title">🌙 Ужины</div>
+                <ul class="meal-list">
+                    <li>Запечённый тофу с салатом из огурца и помидора</li>
+                    <li>Чечевица с рисом (маджадра)</li>
+                    <li>Гречка с тушёной свёклой и морковью</li>
+                    <li>Фасоль тушёная в томатном соусе</li>
+                    <li>Булгур с тушёными овощами</li>
+                </ul>
+            </div>
+
+            <div class="meal-group">
+                <div class="meal-group-title">🥜 Перекусы</div>
+                <ul class="meal-list">
+                    <li>Банан + горсть грецких орехов</li>
+                    <li>Финики (3–5 штук)</li>
+                    <li>Хумус с хлебцами</li>
+                    <li>Запечённое яблоко с корицей</li>
+                    <li>Протеиновый коктейль (протеин + растительное молоко + банан)</li>
+                    <li>Курага и чернослив</li>
+                </ul>
+            </div>
+
+            <!-- ДЕНЬ -->
+            <div class="day-plan">
+                <div class="day-plan-title">📅 Примерное меню на день</div>
+                <table>
+                    <thead>
+                        <tr><th>Приём пищи</th><th>Время</th><th>Пример</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Завтрак</strong></td><td>8:00 – 9:00</td><td>Овсянка на растительном молоке + банан + семена льна</td></tr>
+                        <tr><td><strong>Перекус</strong></td><td>11:00</td><td>Горсть грецких орехов + 3 финика</td></tr>
+                        <tr><td><strong>Обед</strong></td><td>13:00 – 14:00</td><td>Рис с запечённым тофу и тушёной брокколи</td></tr>
+                        <tr><td><strong>Перекус</strong></td><td>16:00</td><td>Протеиновый коктейль или хумус с хлебцами</td></tr>
+                        <tr><td><strong>Ужин</strong></td><td>19:00 – 20:00</td><td>Гречка с тушёной чечевицей и морковью</td></tr>
+                        <tr><td><strong>Перед сном</strong></td><td>21:00</td><td>Запечённое яблоко (при необходимости)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="divider"></div>
+            Диетический стол №5 — рекомендации по лечебному питанию.<br>
+            Перед изменением рациона проконсультируйтесь с лечащим врачом.
+        </footer>
+
+    </div>
+</body>
+</html>
